@@ -1,0 +1,76 @@
+@import "http://fonts.googleapis.com/css?family=Lato:light,lightitalic,regular,regularitalic,bold,bolditalic,900,900italic.css";
+
+@really_black: #111;
+@mostly_black: #343434;
+@grey: #555;
+@lighter_grey: #878;
+@light_shadow: #ddd;
+@translucent: rgba(255, 255, 255, 0.1);
+@off_white: #eee;
+@centre_width: 500px;
+
+// mix-in
+.the-font {
+  font-family: "Lato", "Helvetica Neue", "Lucida Grande", "Arial";
+  font-size: 13px;
+  color: @grey;
+}
+
+.centre_margin {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// common
+body {
+  .the-font;
+  text-align: center;
+  -webkit-text-stroke: 1px @translucent;
+}
+
+h1, h2 {
+  margin: 0;
+  font-size: 22px;
+  color: @mostly_black;
+}
+
+h1 {
+  text-shadow: 1px 2px 2px @light_shadow;
+  font-size: 60px;
+}
+
+// posts
+.posts {
+  .centre_margin;
+  text-align: left;
+  width: @centre_width;
+  .post {
+    margin: 10px;
+    margin-bottom: 40px;
+    .comments {
+      .centre_margin;
+      color: @lighter_grey;
+      width: @centre_width * .6;
+      .author {
+        background-color: @off_white;
+        color: @grey;
+      }
+    }
+  }
+}
+
+.title {
+  color: @mostly_black;
+  font-weight: bold;
+  text-decoration: underline;
+  background-color: @off_white;
+}
+
+// forms
+input, textarea {
+  .the-font;
+  color: @really_black;
+  width: @centre_width;
+  display: block;
+  margin-bottom: 10px;
+}

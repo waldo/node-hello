@@ -1,0 +1,61 @@
+@import "http://fonts.googleapis.com/css?family=Lato:light,lightitalic,regular,regularitalic,bold,bolditalic,900,900italic.css";
+.the-font {
+  font-family: "Lato", "Helvetica Neue", "Lucida Grande", "Arial";
+  font-size: 13px;
+  color: #555555;
+}
+.centre_margin {
+  margin-left: auto;
+  margin-right: auto;
+}
+body {
+  font-family: "Lato", "Helvetica Neue", "Lucida Grande", "Arial";
+  font-size: 13px;
+  color: #555555;
+  text-align: center;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+}
+h1, h2 {
+  margin: 0;
+  font-size: 22px;
+  color: #343434;
+}
+h1 {
+  text-shadow: 1px 2px 2px #dddddd;
+  font-size: 60px;
+}
+.posts {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  width: 500px;
+}
+.posts .post {
+  margin: 10px;
+  margin-bottom: 40px;
+}
+.posts .post .comments {
+  margin-left: auto;
+  margin-right: auto;
+  color: #887788;
+  width: 300px;
+}
+.posts .post .comments .author {
+  background-color: #eeeeee;
+  color: #555555;
+}
+.title {
+  color: #343434;
+  font-weight: bold;
+  text-decoration: underline;
+  background-color: #eeeeee;
+}
+input, textarea {
+  font-family: "Lato", "Helvetica Neue", "Lucida Grande", "Arial";
+  font-size: 13px;
+  color: #555555;
+  color: #111111;
+  width: 500px;
+  display: block;
+  margin-bottom: 10px;
+}

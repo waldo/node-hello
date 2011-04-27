@@ -1,0 +1,9 @@
+    <div class="post">
+      <a href="/post/${art._id}">
+        <div class="title">${art.title}</div>
+      </a>
+      <div class="body">${art.body}</div>
+      <div class="comments">
+        {{partial(art.comments) 'posts/comment'}}
+      </div>
+    </div>

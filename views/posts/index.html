@@ -1,0 +1,10 @@
+<h1>Waldo's blog</h1>
+<div class="posts">
+  {{each(i, item) arts}}
+    {{partial({art: item}) 'posts/view'}}
+  {{/each}}
+  <div class="new-posts">
+    <h2>Add a new post</h2>
+    {{partial 'posts/new'}}
+  </div>
+</div>
