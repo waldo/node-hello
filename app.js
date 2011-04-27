@@ -37,7 +37,7 @@ var dbConn = 'mongo://' + userPass + creds['hostname'] + port + '/' + creds['db'
 
 console.error('dbConn: ' + util.inspect(dbConn, true));
 
-mongo.connect(dbConn, function(err, dbObj) {
+mongo.connect(dbConn, function(err, dbObj){
   if (err) {
     console.error('err: ' + util.inspect(err, true));
     console.error('dbObj: ' + util.inspect(dbObj, true));
@@ -46,21 +46,23 @@ mongo.connect(dbConn, function(err, dbObj) {
   articles.setup(dbObj, bson);
 
   // Dummy data
-  if (articles.findAll(function(results) { return results; }) == []) {
-    articles.save([
-        { title: 'Post one', body: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renais', comments:[
-          { author: 'Bobby', text: 'I love it' },
-          { author: 'Dave', text: 'This is rubbish!' }
-        ]},
-        { title: 'Post two', body: 'Body two' },
-        { title: 'Post three', body: 'Body three' }
-      ],
-      function(err, articles){
-        console.error('articles err: ' + util.inspect(err, true));
-        console.error('articles: ' + util.inspect(articles, true));
-      }
-    );
-  }
+  articles.findAll(function(arts){
+    if (arts === undefined || arts.length == 0) {
+      articles.save([
+          { title: 'Post one', body: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renais', comments:[
+            { author: 'Bobby', text: 'I love it' },
+            { author: 'Dave', text: 'This is rubbish!' }
+          ]},
+          { title: 'Post two', body: 'Body two' },
+          { title: 'Post three', body: 'Body three' }
+        ],
+        function(err, articles){
+          console.error('articles err: ' + util.inspect(err, true));
+          console.error('articles: ' + util.inspect(articles, true));
+        }
+      );
+    }
+  });
 });
 
 // Configuration
@@ -117,12 +119,16 @@ app.get('/new', function(req, res){
 });
 
 app.post('/new', function(req, res){
-  articles.save(
-    req.param('post'),
-    function(error, docs) {
+  if(req.xhr) {
+    articles.save(req.param('post'), function(error, docs) {
+      res.partial('posts/view', { art: docs[0] });
+    });
+  }
+  else {
+    articles.save(req.param('post'), function(error, docs) {
       res.redirect('/');
-    }
-  );
+    });
+  }
 });
 
 // Only listen on $ node app.js
